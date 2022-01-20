@@ -64,44 +64,47 @@ class _SplashState extends State<Splash> {
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Scaffold(
-        // resizeToAvoidBottomInset: false,
-        appBar: AppBar(),
-        backgroundColor: theme.backgroundColor,
-        body: Container(
-          width: size.width,
-          height: size.height,
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: size.height * 0.25,
-                child: Stack(
-                  children: [
-                    AnimatedAlign(
-                      alignment: isAnimated ? finalPosition : startPosition,
-                      duration: Duration(milliseconds: 800),
-                      curve: Curves.fastOutSlowIn,
-                      child: Image(
-                        image: AssetImage('assets/image/logo.png'),
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          // resizeToAvoidBottomInset: false,
+          appBar: AppBar(),
+          backgroundColor: theme.backgroundColor,
+          body: Container(
+            width: size.width,
+            height: size.height,
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: size.height * 0.25,
+                  child: Stack(
+                    children: [
+                      AnimatedAlign(
+                        alignment: isAnimated ? finalPosition : startPosition,
+                        duration: Duration(milliseconds: 800),
+                        curve: Curves.fastOutSlowIn,
+                        child: Image(
+                          image: AssetImage('assets/image/logo.png'),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    AnimatedOpacity(
-                      opacity: isAnimated ? 1.0 : 0.0,
-                      duration: Duration(milliseconds: 1000),
-                      curve: Curves.easeIn,
-                      child: Login(),
-                    ),
-                  ],
+                Expanded(
+                  child: ListView(
+                    children: [
+                      AnimatedOpacity(
+                        opacity: isAnimated ? 1.0 : 0.0,
+                        duration: Duration(milliseconds: 1000),
+                        curve: Curves.easeIn,
+                        child: Login(),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

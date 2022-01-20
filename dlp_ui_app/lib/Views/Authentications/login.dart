@@ -24,30 +24,71 @@ class _LoginState extends State<Login> {
             CupertinoIcons.mail,
           ),
           SizedBox(
-            height: Util.scale(16),
+            height: Util.scale(24),
           ),
           textCard(
             'Password',
             CupertinoIcons.lock,
+            isPassword: true,
           ),
-          Text('Login'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Signup'),
-              Text('Forgot Password?'),
-            ],
+          SizedBox(
+            height: Util.scale(24),
+          ),
+          Container(
+            width: size.width * 0.8,
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: UIColor.appColor,
+              borderRadius: BorderRadius.circular(50.0),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              'Login',
+              style: UITextStyles.appHighlightedText.copyWith(
+                fontSize: Util.fontSize(20.0),
+                color: Colors.white,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: Util.scale(16),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Signup',
+                  style: UITextStyles.appInfoText,
+                ),
+                Text(
+                  'Forgot Password?',
+                  style: UITextStyles.appInfoText,
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
+  var isPassNotVisible = true;
   textCard(
     text,
-    icon,
-  ) =>
-      Container(
+    icon, {
+    isPassword = false,
+  }) {
+    return Card(
+      elevation: 8.0,
+      shadowColor: UIColor.appIconColor.withOpacity(0.35),
+      borderOnForeground: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0),
+      ),
+      child: Container(
         padding: const EdgeInsets.fromLTRB(
           16.0,
           8.0,
@@ -67,15 +108,36 @@ class _LoginState extends State<Login> {
             ),
             TextFormField(
               style: UITextStyles.appBaseText,
+              obscureText: isPassword && isPassNotVisible,
+              cursorColor: UIColor.appColor,
               decoration: InputDecoration(
+                focusColor: UIColor.appColor,
                 border: InputBorder.none,
                 icon: Icon(
                   icon,
                   size: Util.scale(26),
                 ),
+                suffixIcon: isPassword
+                    ? IconButton(
+                        icon: Icon(
+                          isPassNotVisible
+                              ? CupertinoIcons.eye
+                              : CupertinoIcons.eye_slash,
+                          size: Util.scale(26),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isPassNotVisible = !isPassNotVisible;
+                          });
+                          // print(isPassNotVisible);
+                        },
+                      )
+                    : null,
               ),
             ),
           ],
         ),
-      );
+      ),
+    );
+  }
 }
