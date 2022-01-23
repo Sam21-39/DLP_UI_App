@@ -1,5 +1,6 @@
 import 'package:dlp_ui_app/UI/ui.dart';
 import 'package:dlp_ui_app/Utils/util.dart';
+import 'package:dlp_ui_app/Views/Dashboard/dashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,20 +35,27 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: Util.scale(24),
           ),
-          Container(
-            width: size.width * 0.8,
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: UIColor.appColor,
-              borderRadius: BorderRadius.circular(50.0),
+          GestureDetector(
+            onTap: () => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => Dashboard(),
+              ),
             ),
-            alignment: Alignment.center,
-            child: Text(
-              'Login',
-              style: UITextStyles.appHighlightedText.copyWith(
-                fontSize: Util.fontSize(20.0),
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
+            child: Container(
+              width: size.width * 0.8,
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: UIColor.appColor,
+                borderRadius: BorderRadius.circular(50.0),
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                'Login',
+                style: UITextStyles.appHighlightedText.copyWith(
+                  fontSize: Util.fontSize(20.0),
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
           ),
